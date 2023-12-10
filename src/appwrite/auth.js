@@ -1,7 +1,7 @@
-import config from "../../config/config";
+import config from '../config/config'
 import { Client, ID, Account } from 'appwrite';
 
-export class Account {
+export class AccountService {
     client = new Client();
     constructor() {
         this.client.setEndpoint(config.appWriteUrl),
@@ -45,5 +45,5 @@ export class Account {
         }
     }
 }
-const account = new Account();
-export default account;
+const authService = new AccountService();
+export default authService;
