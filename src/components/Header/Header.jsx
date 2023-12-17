@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Logo, Logout } from '../index'
+import { Container, Logo, LogoutBtn } from '../index'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -38,12 +38,11 @@ const Header = () => {
 
   return (
     <header className='py-3 shadow bg-gray-500'>
-      <Container>
+      {/* <Container> */}
         <nav className='flex'>
           <div className='mr-4'>
-            <Link to='/'>
+            <Link to='/' className=' cursor-pointer'>
               <Logo width='70px' />
-
             </Link>
           </div>
           <ul className='flex ml-auto'>
@@ -59,12 +58,12 @@ const Header = () => {
             )}
             {authStatus && (
               <li>
-                <Logout />
+                <LogoutBtn />
               </li>
             )}
           </ul>
         </nav>
-      </Container>
+      {/* </Container> */}
     </header>
   )
 }

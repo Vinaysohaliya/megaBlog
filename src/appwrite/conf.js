@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { Client, ID, Databases, Storage, Query, Query } from 'appwrite'
+import { Client, ID, Databases, Storage, Query, Account } from 'appwrite'
 
 export class Service {
     client = new Client();
@@ -62,6 +62,7 @@ export class Service {
             return false;
         }
     }
+
     async getPost(slug) {
         try {
             return await this.databases.getDocument(
@@ -74,6 +75,7 @@ export class Service {
             return false;
         }
     }
+    
     async getPosts(queries = [Query.equal('status', 'active'),]) {
         try {
             return await this.databases.listDocuments(
@@ -124,7 +126,7 @@ export class Service {
 
         } catch (error) {
             console.log(error);
-            return false;
+            throw error;
         }
     }
 }

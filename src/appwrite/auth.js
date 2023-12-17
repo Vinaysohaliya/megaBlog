@@ -3,18 +3,20 @@ import { Client, ID, Account } from 'appwrite';
 
 export class AccountService {
     client = new Client();
+    account;
     constructor() {
         this.client.setEndpoint(config.appWriteUrl),
-            this.client.setProject(config.appWriteProject)
-        this.account = new Account(this.client);
+        this.client.setProject(config.appWriteProject)
+        this.account = new Account(this.client)
     }
-    async creatAccount({ email, password, name }) {
+    async createAccount({email, password, name}) {
         try {
-            const userAccout = await this.account.creat(ID.unique(), email, password, name);
-            if (userAccout) {
-                this.login(email, password);
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            if (userAccount) {
+                console.log("sign ok");
+                return this.login({email, password});
             } else {
-                return userAccout;
+               return  userAccount;
             }
         } catch (error) {
             throw error;
@@ -24,19 +26,20 @@ export class AccountService {
     async login({ email
         , password }) {
         try {
+            console.log("login ko");
             return await this.account.createEmailSession(email, password);
         } catch (error) {
             throw error;
         }
     }
-    async getuser(){
+    async getuser() {
         try {
             return await this.account.get();
         } catch (error) {
             throw error;
         }
-        return null;
     }
+    
     async logout(){
         try {
             await this.account.deleteSessions();

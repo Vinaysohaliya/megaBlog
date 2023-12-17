@@ -13,11 +13,12 @@ function Login() {
     const [error, setError] = useState("")
 
     const login = async(data) => {
+        console.log(data);
         setError("")
         try {
             const session = await authService.login(data)
             if (session) {
-                const userData = await authService.getCurrentUser()
+                const userData = await authService.getuser()
                 if(userData) dispatch(authLogin(userData));
                 navigate("/")
             }
@@ -80,4 +81,4 @@ function Login() {
   )
 }
 
-export default Login
+export {Login}

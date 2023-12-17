@@ -15,13 +15,18 @@ function Signup() {
     const create = async(data) => {
         setError("")
         try {
-            const userData = await authService.creatAccount(data)
+            const userData = await authService.createAccount(data)
+            console.log(userData);
             if (userData) {
-                const userData = await authService.getCurrentUser()
-                if(userData) dispatch(login(userData));
+                console.log(userData);
+                console.log("555555555555555555555555555555555555555555555");
+                const userData2 = await authService.getuser()
+                console.log(userData2);
+                if(userData2) dispatch(login(userData2));
                 navigate("/")
             }
         } catch (error) {
+            console.log("erro");
             setError(error.message)
         }
     }
@@ -85,4 +90,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export { Signup}
