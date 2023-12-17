@@ -25,7 +25,8 @@ export default function PostForm({ post }) {
             console.log(post);
             const file = data.image[0] ? await appwriteService.uplodeFile(data.image[0]) : null;
             if (file) {
-               await appwriteService.deleteFile(post.$id);
+
+                await appwriteService.deleteFile(post.img);
             }
             const title = data.title;
             const content = data.content;

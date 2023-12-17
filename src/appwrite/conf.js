@@ -62,7 +62,6 @@ export class Service {
             return false;
         }
     }
-
     async getPost(slug) {
         try {
             return await this.databases.getDocument(
@@ -75,7 +74,6 @@ export class Service {
             return false;
         }
     }
-    
     async getPosts(queries = [Query.equal('status', 'active'),]) {
         try {
             return await this.databases.listDocuments(
@@ -118,6 +116,7 @@ export class Service {
     }
 
     async getFilePreview(fileId){
+        console.log(fileId);
         try {
             return  this.bucket.getFilePreview(
                 config.appWriteBucket,
