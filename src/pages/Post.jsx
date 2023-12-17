@@ -9,17 +9,21 @@ import { useSelector } from "react-redux";
 export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
-    const [img, setImg] = useState(''); // Changed state variable name for clarity
+    const [img, setImg] = useState(''); 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData ? post.userid === userData.data.$id : false;
   
     useEffect(() => {
       const fetchData = async () => {
         try {
+          console.log(userData);
+          console.log(post);
           if (slug) {
             const fetchedPost = await appwriteService.getPost(slug);
             if (fetchedPost) {
+              console.log(post);
+              console.log(userData.data.$id);
               setPost(fetchedPost);
               getImg(fetchedPost.img);
             } else {
@@ -39,7 +43,7 @@ export default function Post() {
     const deletePost = () => {
       appwriteService.deletePost(post.$id).then((status) => {
         if (status) {
-          appwriteService.deleteFile(post.featuredImage);
+          appwriteService.deleteFile(post.img);
           navigate("/");
         }
       });
