@@ -21,11 +21,8 @@ export default function PostForm({ post }) {
 
     const submit = async (data) => {
         if (post) {
-            console.log(data);
-            console.log(post);
             const file = data.image[0] ? await appwriteService.uplodeFile(data.image[0]) : null;
             if (file) {
-
                 await appwriteService.deleteFile(post.img);
             }
             const title = data.title;
@@ -48,12 +45,9 @@ export default function PostForm({ post }) {
             const content = data.content;
             const status = data.status;
             if (file) {
-                console.log(file);
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-                console.log(userData);
-                const dbPost = await appwriteService.createPost({ title, slug, content, img: fileId, status, userId: userData.data.$id });
-                console.log(dbPost);
+                const dbPost = await appwriteService.createPost({ title, slug, content, img: fileId, status, userId: userData.$id });
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }
@@ -72,7 +66,7 @@ export default function PostForm({ post }) {
         return "";
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === "title") {
                 setValue("slug", slugTransform(value.title), { shouldValidate: true });
@@ -83,8 +77,8 @@ export default function PostForm({ post }) {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-col md:flex-row">
+            <div className="md:w-2/3 px-2 mb-4 md:mb-0">
                 <Input
                     label="Title :"
                     placeholder="Title"
@@ -102,7 +96,7 @@ export default function PostForm({ post }) {
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
-            <div className="w-1/3 px-2">
+            <div className="md:w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"

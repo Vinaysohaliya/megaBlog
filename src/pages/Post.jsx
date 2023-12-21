@@ -12,7 +12,7 @@ export default function Post() {
     const [img, setImg] = useState(''); 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    const isAuthor = post && userData ? post.userid === userData.data.$id : false;
+    const isAuthor = post && userData ? post.userid === userData.$id : false;
   
     useEffect(() => {
       const fetchData = async () => {
@@ -23,7 +23,7 @@ export default function Post() {
             const fetchedPost = await appwriteService.getPost(slug);
             if (fetchedPost) {
               console.log(post);
-              console.log(userData.data.$id);
+              console.log(userData.$id);
               setPost(fetchedPost);
               getImg(fetchedPost.img);
             } else {
