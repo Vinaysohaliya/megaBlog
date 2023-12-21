@@ -21,7 +21,7 @@ function AllPosts() {
     }, []);
 
     return (
-        <div className='container mx-auto py-8 bg-gray-700'>
+        <div className=' mx-auto py-8 bg-gray-700'>
             <div className='flex flex-wrap -mx-4'>
                 {posts.map((post) => (
                     <div key={post.$id} className='p-4 lg:w-1/4 md:w-1/2 sm:w-full'>

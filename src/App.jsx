@@ -24,7 +24,6 @@ function App() {
   }, []);
 
   return loading ? (null) : (
-    <div className=' '>
       <div className=' w-full block'>
         <Header/>
         <main>
@@ -32,7 +31,6 @@ function App() {
         </main>
         <Footer />
       </div>
-    </div>
   );
 }
 
