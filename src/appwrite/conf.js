@@ -4,7 +4,7 @@ import { Client, ID, Databases, Storage, Query, Account } from 'appwrite'
 export class Service {
     client = new Client();
     databases;
-    bucket;
+    bucket;     
     constructor() {
         this.client.setEndpoint(config.appWriteUrl)
         this.client.setProject(config.appWriteProject)
@@ -16,8 +16,8 @@ export class Service {
     async createPost({ title, slug, content, img, status, userId }) {
         try {
             return await this.databases.createDocument(
-                config.appWriteDb,
-                config.appWriteCollection,
+                    config.appWriteDb,
+                    config.appWriteCollection,
                 slug,
                 {
                     title,

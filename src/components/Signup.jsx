@@ -19,7 +19,6 @@ function Signup() {
             console.log(userData);
             if (userData) {
                 console.log(userData);
-                console.log("555555555555555555555555555555555555555555555");
                 const userData2 = await authService.getuser()
                 console.log(userData2);
                 if(userData2) dispatch(login(userData2));
